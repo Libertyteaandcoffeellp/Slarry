@@ -100,7 +100,7 @@ img,svg{max-width:100%;display:block}
 .hero-grid{display:grid;gap:16px;grid-template-areas:"copy" "art" "body"}
 .hero-copy{grid-area:copy;display:grid;gap:14px}
 .hero h1{font-size:var(--t-h1);font-weight:800;letter-spacing:-.045em;line-height:.98}
-.hero h1 span{display:block;color:var(--ink);font-size:.52em;letter-spacing:-.03em;line-height:1.12;margin-top:.32em;font-weight:700}
+.hero h1 .h1-sub{display:block;color:var(--ink);font-size:.52em;letter-spacing:-.03em;line-height:1.12;margin-top:.32em;font-weight:700}
 .hero-art{grid-area:art;position:relative;max-width:min(100%,340px);width:100%;justify-self:center}
 .hero-img{width:100%;height:auto;border-radius:var(--r-lg);box-shadow:0 30px 60px -30px rgba(33,74,34,.55),0 2px 6px rgba(18,22,20,.08);background:var(--gold-soft)}
 .badge{position:absolute;left:16px;bottom:-18px;display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:8px 14px 8px 10px;box-shadow:var(--shadow);font-size:.75rem;font-weight:700;color:var(--forest);animation:float 6s ease-in-out infinite}
@@ -424,8 +424,8 @@ dialog.sheet::backdrop{background:rgba(18,22,20,.5);backdrop-filter:blur(2px)}
 <section class="hero" id="top" aria-labelledby="h1">
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow">Green Tea Herbal Blend · 100 g</p>
-      <h1 id="h1">Meet Diet Slim Tea.<span>Your Daily Wellness Tea Ritual.</span></h1>
+      <p class="eyebrow" data-text="heroEyebrow">Green Tea Herbal Blend · 100 g</p>
+      <h1 id="h1"><span data-text="heroTitle">Meet Diet Slim Tea.</span><span class="h1-sub" data-text="heroSubtitle">Your Daily Wellness Tea Ritual.</span></h1>
     </div>
 
     <figure class="hero-art">
@@ -440,7 +440,7 @@ dialog.sheet::backdrop{background:rgba(18,22,20,.5);backdrop-filter:blur(2px)}
     </figure>
 
     <div class="hero-body">
-      <p class="lede">A refreshing green tea herbal blend crafted for people who want a better everyday tea routine.</p>
+      <p class="lede" data-text="heroLede">A refreshing green tea herbal blend crafted for people who want a better everyday tea routine.</p>
       <ul class="blend" aria-label="Blend">
         <li>Green Tea</li><li>Lemongrass</li><li>Ginger</li><li>Cinnamon</li><li>Hibiscus</li><li>Herbs</li>
       </ul>
@@ -539,8 +539,8 @@ dialog.sheet::backdrop{background:rgba(18,22,20,.5);backdrop-filter:blur(2px)}
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow">Pack &amp; pricing</p>
-      <h2 class="h2" id="offH">Choose Your Diet Slim Tea Pack</h2>
-      <p class="sub">Every pack is 100 g. Buy more, pay less per pack.</p>
+      <h2 class="h2" id="offH" data-text="offersTitle">Choose Your Diet Slim Tea Pack</h2>
+      <p class="sub" data-text="offersSub">Every pack is 100 g. Buy more, pay less per pack.</p>
     </div>
 
     <div class="packs" role="radiogroup" aria-label="Pack size" id="packs">
@@ -640,7 +640,7 @@ dialog.sheet::backdrop{background:rgba(18,22,20,.5);backdrop-filter:blur(2px)}
       <h2 class="h2" id="faqH">Questions, answered.</h2>
       <div><button class="btn btn-primary" type="button" data-buy="1">BUY DIET SLIM TEA NOW</button></div>
     </div>
-    <div class="faq-list">
+    <div class="faq-list" id="faqList">
       <details><summary>What is Diet Slim Tea?</summary><p>Diet Slim Tea is a green tea herbal blend created as a refreshing beverage for your everyday wellness routine.</p></details>
       <details><summary>How much should I use?</summary><p>Use approximately 2 g per serving, or follow the preparation instructions on the final packaging.</p></details>
       <details><summary>Can I drink it every day?</summary><p>Diet Slim Tea is designed as an everyday beverage. Please follow the product label and consider your individual dietary needs.</p></details>
@@ -656,8 +656,8 @@ dialog.sheet::backdrop{background:rgba(18,22,20,.5);backdrop-filter:blur(2px)}
 <section class="sec final" aria-labelledby="finH">
   <div class="wrap final-in">
     <p class="eyebrow" style="color:var(--gold)">Diet Slim Tea · 100 g</p>
-    <h2 class="h2" id="finH">Make Your Everyday Tea Better.</h2>
-    <p class="sub">Try Diet Slim Tea today and build your own daily tea ritual.</p>
+    <h2 class="h2" id="finH" data-text="finalTitle">Make Your Everyday Tea Better.</h2>
+    <p class="sub" data-text="finalSub">Try Diet Slim Tea today and build your own daily tea ritual.</p>
     <div class="cta-stack">
       <button class="btn btn-gold" type="button" data-buy="1">GET DIET SLIM TEA — <span data-price="1">₹399</span></button>
       <button class="btn btn-ghost-light" type="button" data-buy="3">GET 3 PACKS — <span data-price="3">₹899</span></button>
@@ -675,7 +675,7 @@ dialog.sheet::backdrop{background:rgba(18,22,20,.5);backdrop-filter:blur(2px)}
     <div class="ftr-grid">
       <div style="display:grid;gap:10px;align-content:start">
         <img class="ftr-logo" src="img/logo-360.webp" width="360" height="327" alt="Diet Slim Tea" loading="lazy">
-        <p>Your Daily Wellness Tea Ritual. A green tea herbal blend in 100 g packs.</p>
+        <p data-text="footerAbout">Your Daily Wellness Tea Ritual. A green tea herbal blend in 100 g packs.</p>
       </div>
       <div>
         <h3>Shop</h3>
@@ -813,12 +813,15 @@ window.DIETEA_CONFIG = {
     number: "",                                    // digits with country code, e.g. "919800000000". Empty = not configured.
     message: "Hi, I want to order Diet Slim Tea. Please share the available offers."
   },
-  razorpayKeyId: "",                               // rzp_live_… public key. Empty = preview mode (test orders, no charge).
+  payments: { enabled: false, provider: "cashfree", mode: "sandbox" },   // filled in by /api/config
   api: {
-    createOrder: "/api/create-order",
-    verifyPayment: "/api/verify-payment",
+    config: "/api/config",                         // admin-edited settings, merged over this block on load
+    checkout: "/api/checkout",
+    orderStatus: "/api/order-status",
     submitReview: ""                               // endpoint that stores reviews for moderation
   },
+  text: {},               // hero / offers / footer copy overrides, keyed by data-text
+  faq: [],                // [{ q, a }]; empty = keep the FAQs written in the page
   analytics: {
     gtmId: "",            // GTM-XXXXXXX. If set, all tags (GA4, Ads, Pixel) should be managed inside GTM.
     ga4Id: "",            // G-XXXXXXXXXX (used only when gtmId is empty)
@@ -839,9 +842,18 @@ window.DIETEA_CONFIG = {
 };
 </script>
 <script>
-(() => {
+(async () => {
 "use strict";
 const C = window.DIETEA_CONFIG;
+/* settings saved in the admin panel override the defaults above */
+const isObj = v => v && typeof v === "object" && !Array.isArray(v);
+const merge = (a, b) => { for (const k of Object.keys(b)) a[k] = isObj(a[k]) && isObj(b[k]) ? merge(a[k], b[k]) : b[k]; return a; };
+try {
+  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 3000);
+  const r = await fetch(C.api.config, { signal: ctl.signal });
+  clearTimeout(t);
+  if (r.ok) { const remote = await r.json(); delete remote.api; merge(C, remote); }
+} catch {}
 document.documentElement.classList.add("js");
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
@@ -937,6 +949,9 @@ function renderCfg() {
     el.innerHTML = v ? esc(v) : '<span class="ph">' + esc(el.dataset.ph) + "</span>";
   });
   $$("[data-link]").forEach(a => { const u = (C.links || {})[a.dataset.link]; if (u) a.href = u; });
+  $$("[data-text]").forEach(el => { const v = (C.text || {})[el.dataset.text]; if (v) el.textContent = v; });
+  const faq = (C.faq || []).filter(f => f && f.q && f.a);
+  if (faq.length) $("#faqList").innerHTML = faq.map(f => "<details><summary>" + esc(f.q) + "</summary><p>" + esc(f.a) + "</p></details>").join("");
   $("#yr").textContent = new Date().getFullYear();
 }
 function renderReviews() {
@@ -1111,7 +1126,7 @@ function renderPayment() {
   const u = customer();
   sumRows(qty, $("#paySum"), "");
   $("#shipTo").innerHTML = "<b>Delivering to</b> " + esc(u.name) + ", " + esc(u.address) + ", " + esc(u.city) + ", " + esc(u.state) + " " + esc(u.pincode) + "<br>" + esc(u.phone) + " · " + esc(u.email);
-  $("#demoNote").hidden = !!C.razorpayKeyId;
+  $("#demoNote").hidden = !!(C.payments || {}).enabled;
   $("#payErr").textContent = "";
 }
 
@@ -1140,57 +1155,63 @@ $("#qMinus").addEventListener("click", () => setQty(qty - 1, "stepper"));
 $("#qPlus").addEventListener("click", () => setQty(qty + 1, "stepper"));
 $("#upsellBtn").addEventListener("click", e => { const to = +e.currentTarget.dataset.to; track("upsell_accept", { from_qty: qty, to_qty: to }); setQty(to, "upsell"); });
 
-/* payment */
-function newOrderId() {
-  const d = new Date(), p = n => String(n).padStart(2, "0");
-  return "DST-" + String(d.getFullYear()).slice(2) + p(d.getMonth() + 1) + p(d.getDate()) + "-" + Math.random().toString(36).slice(2, 6).toUpperCase();
-}
-function setPaying(on) { const b = $("#shNext"); b.disabled = on; b.textContent = on ? "OPENING PAYMENT…" : "PAY " + inr(totalFor(qty)) + " SECURELY"; }
+/* payment (Cashfree) */
+function setPaying(on, label) { const b = $("#shNext"); b.disabled = on; b.textContent = on ? (label || "OPENING PAYMENT…") : "PAY " + inr(totalFor(qty)) + " SECURELY"; }
 async function postJSON(url, body) {
   const r = await fetch(url, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
   const data = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error(data.error || "Request failed (" + r.status + ")");
+  if (!r.ok) { const e = new Error(data.error || "Request failed (" + r.status + ")"); e.fields = data.fields; throw e; }
   return data;
 }
+const FIELD_IDS = { name: "fName", phone: "fPhone", email: "fEmail", address: "fAddr", city: "fCity", state: "fState", pincode: "fPin" };
 async function pay() {
-  const u = customer(), n = qty, total = totalFor(n);
+  const u = customer(), n = qty;
   track("add_payment_info", { value: priceFor(n), items: itemsFor(n) });
-  if (!C.razorpayKeyId) {                         // preview mode
-    const id = newOrderId();
-    window.dataLayer.push({ event: "demo_purchase", transaction_id: id, value: priceFor(n), quantity: n });
-    return confirmOrder(id, n, total, u, true);
-  }
   setPaying(true); $("#payErr").textContent = "";
   try {
-    const o = await postJSON(C.api.createOrder, { qty: n, customer: u });
-    if (!window.Razorpay) await loadScript("https://checkout.razorpay.com/v1/checkout.js");
-    const rzp = new window.Razorpay({
-      key: C.razorpayKeyId, amount: o.amount, currency: C.currency, order_id: o.razorpayOrderId,
-      name: "Diet Slim Tea", description: "Diet Slim Tea × " + n + " (100 g)",
-      prefill: { name: u.name, email: u.email, contact: u.phone }, notes: { orderId: o.orderId },
-      theme: { color: "#214A22" },
-      handler: async resp => {
-        try {
-          const v = await postJSON(C.api.verifyPayment, { ...resp, orderId: o.orderId, qty: n, customer: u });
-          confirmOrder(v.orderId || o.orderId, n, o.amount / 100, u, false);
-        } catch (err) { $("#payErr").textContent = "We received your payment but could not confirm the order automatically. Please share payment ID " + resp.razorpay_payment_id + " with us on WhatsApp."; setPaying(false); }
-      },
-      modal: { ondismiss: () => setPaying(false) }
-    });
-    rzp.on("payment.failed", r => { $("#payErr").textContent = "Payment failed: " + (r.error && r.error.description || "please try again or use another method."); setPaying(false); });
-    rzp.open();
+    const o = await postJSON(C.api.checkout, { qty: n, customer: u });
+    if (o.test) {                                  // payments not connected yet: order saved as a test order
+      window.dataLayer.push({ event: "demo_purchase", transaction_id: o.orderId, value: priceFor(n), quantity: n });
+      return confirmOrder(o.orderId, n, o.amount, u, true);
+    }
+    store.set("dietea_pending", { id: o.orderId, n, u });
+    if (!window.Cashfree) await loadScript("https://sdk.cashfree.com/js/v3/cashfree.js");
+    const cf = window.Cashfree({ mode: o.mode });
+    const res = await cf.checkout({ paymentSessionId: o.paymentSessionId, redirectTarget: "_modal" });
+    if (res && res.redirect) return;               // some banks leave the page; we pick up again on return
+    await finishPayment(o.orderId, n, u, res && res.error);
   } catch (err) {
+    if (err.fields) {
+      const bad = Object.keys(err.fields);
+      bad.forEach(k => { const id = FIELD_IDS[k]; if (id) { $("#" + id + "E").textContent = err.fields[k]; $("#" + id).closest(".field").setAttribute("data-err", ""); } });
+      showView(["name", "phone", "email"].some(k => bad.includes(k)) ? "details" : "address");
+      return;
+    }
     $("#payErr").textContent = "We couldn’t start the payment. Check your connection and try again. (" + err.message + ")";
     setPaying(false);
   }
+}
+async function finishPayment(id, n, u, cfError) {
+  setPaying(true, "CONFIRMING PAYMENT…");
+  for (let i = 0; i < (cfError ? 1 : 8); i++) {
+    const s = await fetch(C.api.orderStatus + "?id=" + encodeURIComponent(id)).then(r => r.json()).catch(() => null);
+    if (s && s.paymentStatus === "paid") { store.set("dietea_pending", null); return confirmOrder(id, s.qty || n, s.amount, u, false); }
+    if (s && s.paymentStatus === "failed") break;
+    if (!cfError) await new Promise(r => setTimeout(r, 1500));
+  }
+  $("#payErr").textContent = cfError
+    ? "Payment was not completed" + (cfError.message ? ": " + cfError.message : ".") + " You can try again."
+    : "We couldn’t confirm your payment yet. If money was deducted, it will be confirmed automatically — keep Order ID " + id + " and message us on WhatsApp if you need help.";
+  setPaying(false);
 }
 function confirmOrder(id, n, total, u, demo) {
   if (!demo) track("purchase", { transaction_id: id, value: priceFor(n), shipping: shipFor(n), items: itemsFor(n), pack: n + "-pack" }, "purchase." + id);
   $("#oidTxt").textContent = id;
   sumRows(n, $("#doneSum"));
   $("#doneMsg").textContent = demo
-    ? "Preview mode: this was a test order. No payment was taken."
-    : "We’ll send your order updates to " + u.email + " and " + u.phone + ". Delivering to " + u.city + ", " + u.pincode + ".";
+    ? "Test order: payments aren’t switched on yet, so no money was taken."
+    : u ? "We’ll send your order updates to " + u.email + " and " + u.phone + ". Delivering to " + u.city + ", " + u.pincode + "."
+        : "Your payment is confirmed. We’ll send order updates to your email and phone.";
   store.set("dietea_cart_v1", { qty: 0 });
   showView("done");
 }
@@ -1273,7 +1294,16 @@ selectPack(C.defaultPack, { silent: true });
 renderCart();
 initAnalytics();
 track("view_item", { value: UNIT, items: itemsFor(1) });
-window.DIETEA = { priceFor, saveFor, totalFor, track };   // handy for testing in the console
+window.DIETEA = { priceFor, saveFor, totalFor, track };
+const returned = new URLSearchParams(location.search).get("order_id");
+if (returned) {
+  history.replaceState(null, "", location.pathname + location.hash);
+  const p = store.get("dietea_pending") || {};
+  qty = p.n || qty || 1;
+  if (p.u) Object.entries(FIELD_IDS).forEach(([k, id]) => { $("#" + id).value = k === "phone" ? String(p.u[k]).replace(/^\+91/, "") : p.u[k] || ""; });
+  openSheet("payment");
+  finishPayment(returned, qty, p.id === returned ? p.u : null);
+}   // handy for testing in the console
 })();
 </script>
 
